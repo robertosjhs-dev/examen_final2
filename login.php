@@ -1,29 +1,33 @@
  <?php
 
 require_once("conexion.php");
-
+require_once("config.php");
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 $username=$_POST["username"];
 $password=$_POST["password"];
-$seleciona="SELECT  password from  usuarios ";
+$seleciona="SELECT  password from  usuarios where password=:password ";
 
 
 
  
 $prueba=$gbd->prepare($seleciona);
+
+  $gracias_fran=password_hash($password,PASSWORD_DEFAULT);
  
 $prueba->execute();
 
 $fila=$prueba->fetch(PDO::FETCH_ASSOC);
 
-$_SESSION["es_admin"]=$fila["es_admin"];
+
    
     if($fila){
 
+  
 
-            if(password_verify($password,$fila["password"])){
+            if(password_verify($gracias_fran,$fila["password"])){
+                $_SESSION["es_admin"]=$fila["es_admin"];
                 header("location:panel.php");
                     exit;
     

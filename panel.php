@@ -1,6 +1,7 @@
 <?php
 require_once("conexion.php");
-if($_SESSION["es_admin"]!==1){
+require_once("config.php");
+if($_SESSION["es_admin"]!==0){
 
 $select=("SELECT * FROM usuarios");
 
