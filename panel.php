@@ -2,9 +2,7 @@
 require_once("conexion.php");
 require_once("config.php");
  
-
 $select=("SELECT * FROM usuarios");
-
 
 $lanzar=$gbd->prepare($select);
 
@@ -35,17 +33,20 @@ $fila=$lanzar->fetchAll(PDO::FETCH_ASSOC);
 <td><?=$pepe["id"];   ?></td> 
 <td><?=$pepe["username"];   ?></td> 
 <td><?=$pepe["nombre"] , $pepe["apellido"]   ?></td> 
-<td><?=$pepe["fecha_nac"]  ?></td>
+
+
+<td><?= $pepe["fecha_nac"]  ?> </td>
 <td><?php if($pepe["es_admin"]==1){  
     echo "ADMIN";
 } else{    
     echo "USER";
  } ?> 
 </td>
+ </table> 
 
  
 
- </table>
+
 
 <?php } ?>
 
