@@ -16,30 +16,33 @@ $prueba=$gbd->prepare($seleciona);
  
 $prueba->execute();
 
+$fila=$prueba->fetch(PDO::FETCH_ASSOC);
+
+$_SESSION["es_admin"]=$fila["es_admin"];
+   
+    if($fila){
 
 
-  
+            if(password_verify($password,$fila["password"])){
+                header("location:panel.php");
+                    exit;
+    
 
-$fila=$prueba->FETCH(PDO::FETCH_ASSOC);
 
-echo $fila["password"];
-if($fila){
+            }else{
+          
+            header("location:login.php");
+            exit;
 
-if(password_verify($password,$fila["password"]))
+}
+} 
+
+}
+
+
+
 
  
-header("location:panel.php");
-exit;
-
-}else{
-    header("location:login.php");
-exit;
-}
-
-
-
-
-}
 
 
 

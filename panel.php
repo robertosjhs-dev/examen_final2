@@ -1,5 +1,6 @@
 <?php
 require_once("conexion.php");
+if($_SESSION["es_admin"]!==1){
 
 $select=("SELECT * FROM usuarios");
 
@@ -15,6 +16,16 @@ $fila=$lanzar->fetchAll(PDO::FETCH_ASSOC);
 
 
 
+}else{
+
+header("Location: login.php");
+
+}
+
+
+
+
+
 
 
 
@@ -25,7 +36,8 @@ $fila=$lanzar->fetchAll(PDO::FETCH_ASSOC);
 <?php foreach ($fila as $pepe) {
    
  ?>
- <p></p>
+ <p><?=$pepe["username"];   ?></p>
+  <p><?=$pepe["nombre"] . $pepe["apellido"]   ?></p>
 
 <?php } ?>
 
