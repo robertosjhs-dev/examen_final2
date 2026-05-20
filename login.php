@@ -7,7 +7,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 $username=$_POST["username"];
 $password=$_POST["password"];
-$seleciona="SELECT  password from  usuarios ";
+ 
+$seleciona="SELECT  password  from  usuarios where username=:u ";
 
 
 
@@ -16,15 +17,14 @@ $prueba=$gbd->prepare($seleciona);
 
  
  
-$prueba->execute();
+$prueba->execute([":u"=>$username]);
 
 $fila=$prueba->fetch(PDO::FETCH_ASSOC);
 
-
+ 
    
     if($fila){
-
-  
+ 
 //no se si esta bien ya que funciona bien el admin , admin pero los demas no idk
             if(password_verify($password,$fila["password"])){
                 $_SESSION["es_admin"]=$fila["es_admin"];
