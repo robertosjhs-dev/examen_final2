@@ -26,7 +26,6 @@ $fila=$prueba->fetch(PDO::FETCH_ASSOC);
     if($fila){
  
 //no se si esta bien ya que funciona bien el admin , admin pero los demas no idk
-//
         if(password_verify($password,$fila["password"])){
                 $_SESSION["es_admin"]=$fila["es_admin"];
                 $_SESSION["username"]=$username;
