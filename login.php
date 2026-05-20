@@ -7,8 +7,34 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 $username=$_POST["username"];
 $password=$_POST["password"];
+$seleciona="SELECT  password from  usuarios ";
 
 
+
+ 
+$prueba=$gbd->prepare($seleciona);
+ 
+$prueba->execute();
+
+
+
+  
+
+$fila=$prueba->FETCH(PDO::FETCH_ASSOC);
+
+echo $fila["password"];
+if($fila){
+
+if(password_verify($password,$fila["password"]))
+
+ 
+header("location:panel.php");
+exit;
+
+}else{
+    header("location:login.php");
+exit;
+}
 
 
 
