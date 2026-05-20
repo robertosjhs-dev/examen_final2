@@ -7,14 +7,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 $username=$_POST["username"];
 $password=$_POST["password"];
-$seleciona="SELECT  password from  usuarios where password=:password ";
+$seleciona="SELECT  password from  usuarios ";
 
 
 
  
 $prueba=$gbd->prepare($seleciona);
 
-  $gracias_fran=password_hash($password,PASSWORD_DEFAULT);
+ 
  
 $prueba->execute();
 
@@ -25,10 +25,11 @@ $fila=$prueba->fetch(PDO::FETCH_ASSOC);
     if($fila){
 
   
-
-            if(password_verify($gracias_fran,$fila["password"])){
+//no se si esta bien ya que funciona bien el admin , admin pero los demas no idk
+            if(password_verify($password,$fila["password"])){
                 $_SESSION["es_admin"]=$fila["es_admin"];
-                header("location:panel.php");
+                $_SESSION["username"]=$username;
+                header("location:admin.php");
                     exit;
     
 
@@ -41,23 +42,7 @@ $fila=$prueba->fetch(PDO::FETCH_ASSOC);
 }
 } 
 
-}
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
- ?>
+}?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
